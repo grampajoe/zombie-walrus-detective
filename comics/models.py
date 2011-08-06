@@ -1,10 +1,11 @@
 from django.db import models
+import datetime
 
 class Comic(models.Model):
     image = models.ImageField(upload_to='comics')
     title = models.CharField(max_length=256)
-    date = models.DateTimeField()
-    description = models.TextField()
+    date = models.DateTimeField(default=datetime.datetime.now)
+    description = models.TextField(blank=True)
 
     @property
     def next(self):
