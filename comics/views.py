@@ -1,6 +1,6 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
-from zombiewalrus.comics.models import Comic
+from comics.models import Comic
 
 # Create your views here.
 def comic(request, comic_id=None):
