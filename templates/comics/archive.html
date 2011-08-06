@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
 {% if comics %}
-<h3>Archive</h3>
-<ul class="archive">
+<h3 class="archive">Archive</h3>
+<ul id="archive">
 	{% for comic in comics %}
 	<li>
-		<a href="{{ comic.get_absolute_url }}">{{ comic.title }}</a>
 		<span class="date">{{ comic.date|date:comic.date_format }}</span>
+		<a href="{{ comic.get_absolute_url }}">{{ comic.title }}</a>
 	</li>
 	{% endfor %}
 </ul>

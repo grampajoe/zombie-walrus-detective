@@ -1,10 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
-<h3>{{ comic.title }}</h3>
 {% if comic.next %}<a href="{{ comic.next.get_absolute_url }}">{% endif %}
-<img class="comic" src="{{ MEDIA_URL }}{{ comic.image }}" />
+<img class="comic" src="{{ MEDIA_URL }}{{ comic.image }}" alt="{{ comic.title }}" title="{{ comic.title }}" />
 {% if comic.next %}</a>{% endif %}
-<ul class="navigation">
+<ul id="nav">
 	{% if first_comic %}
 	<li><a href="{% url comic first_comic.pk %}">First</a></li>
 	{% else %}
@@ -27,7 +26,7 @@
 	<li>Latest</li>
 	{% endif %}
 </ul>
-<div class="description">
+<div id="description">
 	<p class="date">{{ comic.date|date:comic.date_format }}</p>
 	{{ comic.description }}
 </div>

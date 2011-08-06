@@ -2,11 +2,15 @@
 <html>
 <head>
 	<title>Zombie Walrus Detective{% block title %}{% endblock %}</title>
+	<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/style.css" />
 </head>
 <body>
+<div id="wrapper">
 	<h1><a href="{% url home %}">Zombie Walrus Detective</a></h1>
 	<div id="content">
 		{% block content %}{% endblock %}
 	</div>
+	<div id="footer"></div>
+</div>
 </body>
 </html>
