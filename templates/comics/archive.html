@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if comics %}
+<h3>Archive</h3>
+<ul class="archive">
+	{% for comic in comics %}
+	<li><a href="{{ comic.get_absolute_url }}">{{ comic.title }}</a></li>
+	{% endfor %}
+</ul>
+{% else %}
+<p>No comics found?</p>
+{% endif %}
+{% endblock %}
