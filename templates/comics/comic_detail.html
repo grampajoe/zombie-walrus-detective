@@ -3,7 +3,11 @@
 <h3>{{ comic.title }}</h3>
 <img class="comic" src="{{ MEDIA_URL }}{{ comic.image }}" />
 <ul class="navigation">
+	{% if first_comic %}
 	<li><a href="{% url comic first_comic.pk %}">First</a></li>
+	{% else %}
+	<li>First</li>
+	{% endif %}
 	{% if comic.previous %}
 	<li><a href="{{ comic.previous.get_absolute_url }}">Previous</a></li>	
 	{% else %}
@@ -15,7 +19,11 @@
 	{% else %}
 	<li>Next</li>
 	{% endif %}
+	{% if latest_comic %}
 	<li><a href="{% url comic latest_comic.pk %}">Latest</a></li>
+	{% else %}
+	<li>Latest</li>
+	{% endif %}
 </ul>
 <div class="description">
 	<p class="date">{{ comic.date }}</p>
