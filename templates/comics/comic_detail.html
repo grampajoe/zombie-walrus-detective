@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
 <h3>{{ comic.title }}</h3>
+{% if comic.next %}<a href="{{ comic.next.get_absolute_url }}">{% endif %}
 <img class="comic" src="{{ MEDIA_URL }}{{ comic.image }}" />
+{% if comic.next %}</a>{% endif %}
 <ul class="navigation">
 	{% if first_comic %}
 	<li><a href="{% url comic first_comic.pk %}">First</a></li>
@@ -26,7 +28,7 @@
 	{% endif %}
 </ul>
 <div class="description">
-	<p class="date">{{ comic.date }}</p>
+	<p class="date">{{ comic.date|date:comic.date_format }}</p>
 	{{ comic.description }}
 </div>
 {% endblock %}

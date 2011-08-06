@@ -4,7 +4,10 @@
 <h3>Archive</h3>
 <ul class="archive">
 	{% for comic in comics %}
-	<li><a href="{{ comic.get_absolute_url }}">{{ comic.title }}</a></li>
+	<li>
+		<a href="{{ comic.get_absolute_url }}">{{ comic.title }}</a>
+		<span class="date">{{ comic.date|date:comic.date_format }}</span>
+	</li>
 	{% endfor %}
 </ul>
 {% else %}

@@ -7,6 +7,8 @@ class Comic(models.Model):
     date = models.DateTimeField(default=datetime.datetime.now)
     description = models.TextField(blank=True)
 
+    date_format = 'F jS, Y'
+
     @property
     def next(self):
         """Get the next comic by date."""
@@ -34,6 +36,9 @@ class Comic(models.Model):
                 return self.__previous
             except IndexError:
                 return None
+
+    def date_formatted(self):
+        return self.date
 
     @models.permalink
     def get_absolute_url(self):
