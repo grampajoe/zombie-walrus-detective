@@ -92,19 +92,18 @@ h1 a
 
 #description
 {
-	display:none;
 	width:586px;
 	margin:0 auto;
-	padding:10px;
+	padding:20px 10px;
 	clear:both;
 	text-align:left;
 	color:#ffeeda;
-	font:normal 14px/1.25em Helvetica,Arial,sans-serif;
+	font:normal 16px/1.25em Helvetica,Arial,sans-serif;
 }
 
-#description h3
+#description .date
 {
-	font:normal 24px/1.25em Helvetica,Arial,sans-serif;
+	font:normal 12px/1.25em Helvetica,Arial,sans-serif;
 }
 
 h3.archive
