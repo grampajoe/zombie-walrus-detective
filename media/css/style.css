@@ -1,5 +1,3 @@
-@import url(http://fonts.googleapis.com/css?family=Neuton);
-
 * { margin:0; padding:0; }
 
 body
@@ -34,13 +32,13 @@ h1 a
 	width:auto;
 	min-height:245px;
 	text-align:center;
-	font:normal 18px/1.25em 'Neuton','Times New Roman',serif;
-	color:#ffeeda;
+	font:normal 18px/1.25em Helvetica,Arial,sans-serif;
+	color:#ffffb3;
 }
 
 #nav
 {
-	width:400px;
+	width:586px;
 	margin:0 auto;
 	list-style:none;
 }
@@ -48,25 +46,81 @@ h1 a
 #nav li
 {
 	float:left;
-	width:80px;
-	text-align:center;
+	width:50px;
+	height:50px;
+	text-indent:-10000px;
+}
+
+#nav li.first
+{
+	width:94px;
+	margin:0 50px 0 0;
+	background:url(../images/nav_first.png) top center no-repeat;
+}
+
+#nav li.prev
+{
+	margin:0 50px 0 0;
+	background:url(../images/nav_prev.png) top center no-repeat;
+}
+
+#nav li.archive
+{
+	width:98px;
+	background:url(../images/nav_archive.png) top center no-repeat;
+}
+
+#nav li.next
+{
+	margin:0 0 0 50px;
+	background:url(../images/nav_next.png) top center no-repeat;
+}
+
+#nav li.latest
+{
+	width:94px;
+	margin:0 0 0 50px;
+	background:url(../images/nav_latest.png) top center no-repeat;
 }
 
 #nav a
 {
-	color:#fff;
+	display:block;
+	width:100%;
+	height:100%;
 }
 
 #description
 {
+	display:none;
+	width:586px;
+	margin:0 auto;
+	padding:10px;
 	clear:both;
+	text-align:left;
+	color:#ffeeda;
+	font:normal 14px/1.25em Helvetica,Arial,sans-serif;
+}
+
+#description h3
+{
+	font:normal 24px/1.25em Helvetica,Arial,sans-serif;
+}
+
+h3.archive
+{
+	width:700px;
+	height:93px;
+	margin:10px auto;
+	text-indent:-10000px;
+	background:url(../images/archive.png) top left no-repeat;
 }
 
 #archive
 {
-	width:680px;
+	width:660px;
 	margin:0 auto;
-	padding:10px;
+	padding:20px;
 	background:rgba(0,1,255,0.5);
 	list-style:none;
 	border-radius:10px;
@@ -84,8 +138,11 @@ h1 a
 #archive li a
 {
 	display:block;
-	width:540px;
+	width:500px;
 	float:right;
+	text-decoration:none;
+	font-weight:bold;
+	color:#00e8ec;
 }
 
 #archive li .date

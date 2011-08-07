@@ -4,30 +4,16 @@
 <img class="comic" src="{{ MEDIA_URL }}{{ comic.image }}" alt="{{ comic.title }}" title="{{ comic.title }}" />
 {% if comic.next %}</a>{% endif %}
 <ul id="nav">
-	{% if first_comic %}
-	<li><a href="{% url comic first_comic.pk %}">First</a></li>
-	{% else %}
-	<li>First</li>
-	{% endif %}
-	{% if comic.previous %}
-	<li><a href="{{ comic.previous.get_absolute_url }}">Previous</a></li>	
-	{% else %}
-	<li>Previous</li>
-	{% endif %}
-	<li><a href="{% url archive %}">Archive</a></li>
-	{% if comic.next %}
-	<li><a href="{{ comic.next.get_absolute_url }}">Next</a></li>
-	{% else %}
-	<li>Next</li>
-	{% endif %}
+	<li class="first">{% if first_comic %}<a href="{% url comic first_comic.pk %}">First</a>{% else %}First{% endif %}</li>
+	<li class="prev">{% if comic.previous %}<a href="{{ comic.previous.get_absolute_url }}">Previous</a>{% else %}Previous{% endif %}</li>
+	<li class="archive"><a href="{% url archive %}">Archive</a></li>
+	<li class="next">{% if comic.next %}<a href="{{ comic.next.get_absolute_url }}">Next</a>{% else %}Next{% endif %}</li>
 	{% if latest_comic %}
-	<li><a href="{% url comic latest_comic.pk %}">Latest</a></li>
-	{% else %}
-	<li>Latest</li>
-	{% endif %}
+	<li class="latest"><a href="{% url comic latest_comic.pk %}">Latest</a>{% else %}Latest{% endif %}</li>
 </ul>
 <div id="description">
 	<p class="date">{{ comic.date|date:comic.date_format }}</p>
-	{{ comic.description }}
+	<h3>{{ comic.title }}</h3>
+	<div>{{ comic.description }}</div>
 </div>
 {% endblock %}
