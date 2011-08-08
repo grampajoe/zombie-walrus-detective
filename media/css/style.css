@@ -153,13 +153,14 @@ h3.archive
 {
 	display:block;
 	width:500px;
-	float:right;
-	text-decoration:none;
+	margin-left:160px;
 	font-weight:bold;
 }
 
 #archive li .date
 {
+	width:150px;
+	float:left;
 }
 
 #footer
