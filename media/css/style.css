@@ -104,16 +104,20 @@ h1 a
 	height:100%;
 }
 
+.bubble
+{
+	border-radius:10px;
+	webkit-border-radius:10px;
+	background:rgba(0,1,255,0.5);
+	padding:20px;
+}
+
 #description
 {
 	width:586px;
 	margin:0 auto;
-	padding:20px 10px;
 	clear:both;
-	border-radius:10px;
-	webkit-border-radius:10px;
 	text-align:left;
-	background:rgba(0,1,255,0.5);
 }
 
 #description .date
@@ -134,11 +138,7 @@ h3.archive
 {
 	width:660px;
 	margin:0 auto;
-	padding:20px;
-	background:rgba(0,1,255,0.5);
 	list-style:none;
-	border-radius:10px;
-	webkit-border-radius:10px;
 }
 
 #archive li

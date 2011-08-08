@@ -2,7 +2,7 @@
 {% block content %}
 {% if comics %}
 <h3 class="archive">Archive</h3>
-<ul id="archive">
+<ul id="archive" class="bubble">
 	{% for comic in comics %}
 	<li>
 		<span class="date">{{ comic.date|date:comic.date_format }}</span>
