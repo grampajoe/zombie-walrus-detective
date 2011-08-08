@@ -6,7 +6,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('zombiewalrus.comics.views',
     url(r'^$', 'comic', name='home'),
-    url(r'^comic/(\d+)/$', 'comic', name='comic'),
+    url(r'^(\d+)/$', 'comic', name='comic'),
     url(r'^archive/$', 'archive', name='archive'),
 )
 
