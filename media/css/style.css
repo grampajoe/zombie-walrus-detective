@@ -3,6 +3,8 @@
 body
 {
 	background:#fffb00;
+	font:normal 16px/1.25em Helvetica,Arial,sans-serif;
+	color:#ffeeda;
 }
 
 #wrapper
@@ -10,6 +12,17 @@ body
 	position:relative;
 	padding-top:10px;
 	background:#0001ff url(../images/bg_top.png) top center repeat-x;
+}
+
+a
+{
+	text-decoration:none;
+	color:#00e8ec;
+}
+
+a:hover
+{
+	text-decoration:underline;
 }
 
 h1
@@ -100,9 +113,7 @@ h1 a
 	border-radius:10px;
 	webkit-border-radius:10px;
 	text-align:left;
-	color:#ffeeda;
 	background:rgba(0,1,255,0.5);
-	font:normal 16px/1.25em Helvetica,Arial,sans-serif;
 }
 
 #description .date
@@ -145,7 +156,6 @@ h3.archive
 	float:right;
 	text-decoration:none;
 	font-weight:bold;
-	color:#00e8ec;
 }
 
 #archive li .date
@@ -154,7 +164,20 @@ h3.archive
 
 #footer
 {
+	position:relative;
 	width:100%;
-	height:235px;
+	height:135px;
+	padding:100px 0 0;
 	background:transparent url(../images/bg_bottom.png) bottom center repeat-x;
+}
+
+#footer p
+{
+	width:660px;
+	margin:0 auto;
+	padding:10px;
+	background:rgba(0,1,255,0.5);
+	border-radius:10px;
+	webkit-border-radius:10px;
+	font-size:12px;
 }
