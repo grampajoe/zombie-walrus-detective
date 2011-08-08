@@ -163,6 +163,22 @@ h3.archive
 	float:left;
 }
 
+h3.about
+{
+	width:700px;
+	height:93px;
+	margin:10px auto;
+	text-indent:-10000px;
+	background:url(../images/about.png) top left no-repeat;
+}
+
+#about
+{
+	width:660px;
+	margin:10px auto;
+	text-align:left;
+}
+
 #footer
 {
 	position:relative;
