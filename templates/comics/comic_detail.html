@@ -19,6 +19,23 @@
 	<div class="data">
 		<span class="date">{{ comic.date|date:comic.date_format }}</span>
 		<a href="{{ comic.get_absolute_url }}">Permalink</a>
+		<a href="{{ comic.get_absolute_url }}" id="share_button">Share</a>
 	</div>
+	<div id="share" class="bubble">
+		<div>
+			<g:plusone size="small"></g:plusone>
+			<script type="text/javascript">
+			(function() {
+				var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+				po.src = 'https://apis.google.com/js/plusone.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+			})();
+			</script>
+		</div>
+		<div>
+			<a href="http://twitter.com/share" class="twitter-share-button" data-url="{{ comic.get_absolute_url }}" data-count="horizontal" data-via="grampajoe" data-related="nataliepee">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+		</div>
+	</div>
+	<script type="text/javascript" src="{{ MEDIA_URL }}js/share.js"></script>
 </div>
 {% endblock %}
