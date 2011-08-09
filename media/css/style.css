@@ -179,6 +179,12 @@ h3.about
 	text-align:left;
 }
 
+#about img
+{
+	float:right;
+	margin:0 0 20px 20px;
+}
+
 #about p
 {
 	margin:0 0 10px;
