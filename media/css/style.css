@@ -112,17 +112,28 @@ h1 a
 	padding:20px;
 }
 
-#description
+.meta
 {
-	width:586px;
+	width:660px;
 	margin:0 auto;
+	padding:0 20px;
 	clear:both;
 	text-align:left;
 }
 
-#description .date
+.meta .description
 {
-	font:normal 12px/1.25em Helvetica,Arial,sans-serif;
+	margin:0 0 20px;
+}
+
+.meta .data
+{
+	font:normal 12px/1em Helvetica,Arial,sans-serif;
+}
+
+.meta .data a
+{
+	margin:0 0 0 10px;
 }
 
 h3.archive

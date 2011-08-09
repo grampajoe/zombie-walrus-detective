@@ -12,8 +12,13 @@
 	{% if latest_comic %}
 	<li class="latest"><a href="{% url comic latest_comic.pk %}">Latest</a>{% else %}Latest{% endif %}</li>
 </ul>
-<div id="description" class="bubble">
-	<p class="date">{{ comic.date|date:comic.date_format }}</p>
-	<div>{{ comic.description }}</div>
+<div class="meta bubble">
+	{% if comic.description %}
+	<div class="description">{{ comic.description }}</div>
+	{% endif %}
+	<div class="data">
+		<span class="date">{{ comic.date|date:comic.date_format }}</span>
+		<a href="{{ comic.get_absolute_url }}">Permalink</a>
+	</div>
 </div>
 {% endblock %}
