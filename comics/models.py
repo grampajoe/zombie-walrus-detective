@@ -1,5 +1,6 @@
 from django.db import models
 import datetime
+import os
 
 class Comic(models.Model):
     image = models.ImageField(upload_to='comics')
@@ -36,9 +37,6 @@ class Comic(models.Model):
                 return self.__previous
             except IndexError:
                 return None
-
-    def date_formatted(self):
-        return self.date
 
     @models.permalink
     def get_absolute_url(self):
