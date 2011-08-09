@@ -203,7 +203,13 @@ h3.about
 
 #about div.natalie
 {
-	margin:0 0 30px;
+	margin:0 0 40px;
+	min-height:184px;
+}
+
+#about div.joe
+{
+	min-height:256px;
 }
 
 #footer
