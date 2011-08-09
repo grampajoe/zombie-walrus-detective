@@ -14,7 +14,7 @@ urlpatterns = patterns('zombiewalrus.comics.views',
 urlpatterns += patterns('',
     url(r'^about/$', TemplateView.as_view(template_name='about.html'),
         name='about'),
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^omgsickbro/', include(admin.site.urls)),
 )
 
 if settings.DEBUG:
