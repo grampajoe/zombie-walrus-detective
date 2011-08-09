@@ -1,5 +1,7 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
+from django.contrib.syndication.views import Feed
+from django.utils import feedgenerator
 from comics.models import Comic
 
 # Create your views here.
@@ -22,3 +24,23 @@ def archive(request):
     comics = Comic.objects.all()
     return render_to_response('comics/archive.html', {'comics': comics},
             context_instance=RequestContext(request))
+
+class ComicRSS(Feed):
+    title = 'Zombie Walrus Detective'
+    description = 'Zombie Walrus Detective, a webcomic.'
+    link = 'http://zombiewalrusdetective.com'
+    description_template = 'feed/description.html'
+    feed_type = feedgenerator.Rss201rev2Feed
+
+    def items(self):
+        return Comic.objects.all()
+
+    def item_title(self, item):
+        return item.title
+
+    def item_pubdate(self, item):
+        return item.date
+
+class ComicAtom(ComicRSS):
+    feed_type = feedgenerator.Atom1Feed
+    subtitle = ComicRSS.description
