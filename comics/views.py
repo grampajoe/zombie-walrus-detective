@@ -29,6 +29,19 @@ def archive(request):
     return render_to_response('comics/archive.html', {'comics': comics},
             context_instance=RequestContext(request))
 
+def contact(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            name = form.cleaned_data['name']
+            message = form.cleaned_data['message']
+    else:
+        form = ContactForm()
+
+    return render_to_response('contact.html', {'contact_form': form},
+            context_instance=RequestContext(request))
+
 class ComicRSS(Feed):
     title = 'Zombie Walrus Detective'
     description = 'Zombie Walrus Detective, a webcomic.'

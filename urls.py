@@ -16,6 +16,7 @@ urlpatterns = patterns('',
 
 urlpatterns += patterns('zombiewalrus.comics.views',
     url(r'^$', 'comic', name='home'),
+    url(r'^contact/$', 'contact', name='contact'),
     url(r'^archive/$', 'archive', name='archive'),
     url(r'^(\d+)/$', 'comic', {'lookup': 'pk'}, name='comic_pk'),
     # This MUST be the last item, or it might catch a lot of stuff
