@@ -48,3 +48,12 @@ class Comic(models.Model):
 
     class Meta:
         ordering = ['-date']
+
+class Comment(models.Model):
+    comic = models.ForeignKey(Comic)
+    date = models.DateTimeField(default=datetime.datetime.now)
+    name = models.CharField(max_length=256)
+    email = models.EmailField()
+    website = models.URLField(blank=True)
+    comment = models.TextField()
+    approved = models.BooleanField(default=False)
