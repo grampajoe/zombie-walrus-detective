@@ -1,11 +1,11 @@
-from django.shortcuts import render_to_response, get_object_or_404
+from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
 from django.contrib.syndication.views import Feed
 from django.utils import feedgenerator
 from comics.models import Comic
 
 # Create your views here.
-def comic(request, comic_id=None):
+def comic(request, comic_id=None, lookup='slug'):
     try:
         latest_comic = Comic.objects.all()[0]
         first_comic = Comic.objects.all().reverse()[0]
@@ -13,7 +13,11 @@ def comic(request, comic_id=None):
         latest_comic = None
         first_comic = None
     if comic_id is not None:
-        comic = get_object_or_404(Comic, pk=comic_id)
+        if lookup == 'slug':
+            comic = get_object_or_404(Comic, slug=comic_id)
+        else:
+            comic = get_object_or_404(Comic, pk=comic_id)
+            return redirect(comic)
     else:
         comic = latest_comic
     return render_to_response('comics/comic_detail.html', {'comic': comic,

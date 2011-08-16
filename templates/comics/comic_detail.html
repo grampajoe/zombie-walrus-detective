@@ -5,12 +5,12 @@
 <img class="comic" src="{{ MEDIA_URL }}{{ comic.image }}" alt="Zombie Walrus Detective in &quot;{{ comic.title }}&quot;" title="Zombie Walrus Detective in &quot;{{ comic.title }}&quot;" />
 {% if comic.next %}</a>{% endif %}
 <ul id="nav">
-	<li class="first">{% if first_comic %}<a href="{% url comic first_comic.pk %}">First</a>{% else %}First{% endif %}</li>
+	<li class="first">{% if first_comic %}<a href="{{ first_comic.get_absolute_url }}">First</a>{% else %}First{% endif %}</li>
 	<li class="prev">{% if comic.previous %}<a href="{{ comic.previous.get_absolute_url }}">Previous</a>{% else %}Previous{% endif %}</li>
 	<li class="archive"><a href="{% url archive %}">Archive</a></li>
 	<li class="next">{% if comic.next %}<a href="{{ comic.next.get_absolute_url }}">Next</a>{% else %}Next{% endif %}</li>
 	{% if latest_comic %}
-	<li class="latest"><a href="{% url comic latest_comic.pk %}">Latest</a>{% else %}Latest{% endif %}</li>
+	<li class="latest"><a href="{{ latest_comic.get_absolute_url }}">Latest</a>{% else %}Latest{% endif %}</li>
 </ul>
 <div class="meta bubble">
 	{% if comic.description %}

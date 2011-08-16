@@ -5,6 +5,7 @@ import os
 class Comic(models.Model):
     image = models.ImageField(upload_to='comics')
     title = models.CharField(max_length=256)
+    slug = models.SlugField()
     date = models.DateTimeField(default=datetime.datetime.now)
     description = models.TextField(blank=True)
 
@@ -40,7 +41,7 @@ class Comic(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('comic', [self.pk])
+        return ('comic', [self.slug])
 
     def __unicode__(self):
         return self.title
