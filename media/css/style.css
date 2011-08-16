@@ -177,6 +177,11 @@ h3.archive
 	font-weight:bold;
 }
 
+#archive li a:visited
+{
+	color:#00ff64;
+}
+
 #archive li .date
 {
 	width:150px;
