@@ -33,9 +33,22 @@ def contact(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
+            from django.core.mail import EmailMessage
+
             email = form.cleaned_data['email']
             name = form.cleaned_data['name']
             message = form.cleaned_data['message']
+            sender = 'zombiewalrusdetective.com' +
+                    ' <contact@zombiewalrusdetective.com>'
+            subject = '{} has sent a message!'.format(name)
+            body = 'Email: {}\n\n{}'.format(email, message)
+            recipients = ['joe@zombiewalrusdetective.com']
+
+            email = EmailMessage(subject, body, sender, recipients,
+                       headers={'Reply-to': email})
+            email.send()
+
+            return redirect('contact')
     else:
         form = ContactForm()
 
