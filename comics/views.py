@@ -3,6 +3,7 @@ from django.template import RequestContext
 from django.contrib.syndication.views import Feed
 from django.utils import feedgenerator
 from comics.models import Comic
+from comics.forms import ContactForm
 
 # Create your views here.
 def comic(request, comic_id=None, lookup='slug'):
@@ -38,7 +39,7 @@ def contact(request):
             email = form.cleaned_data['email']
             name = form.cleaned_data['name']
             message = form.cleaned_data['message']
-            sender = 'zombiewalrusdetective.com' +
+            sender = 'zombiewalrusdetective.com' \
                     ' <contact@zombiewalrusdetective.com>'
             subject = '{} has sent a message!'.format(name)
             body = 'Email: {}\n\n{}'.format(email, message)

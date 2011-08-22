@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 {% block title %}Contact Us{% endblock %}
 {% block content %}
-<form action="{% url contact %}" method="POST">
-	{% for field in form %}
+<form action="{% url contact %}" method="POST" id="contact_form" class="bubble">
+	{% csrf_token %}
+	{% for field in contact_form %}
 	<div>{{ field.label_tag }}{{ field }}</div>
 	{% endfor %}
 	<div><input type="submit" value="Send" /></div>
