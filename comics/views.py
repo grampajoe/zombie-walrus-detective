@@ -37,9 +37,11 @@ def comic(request, comic_id=None, lookup='slug'):
     else:
         comment_form = CommentForm()
 
+    comments = comic.comment_set.filter(approved=True)
+
     return render_to_response('comics/comic_detail.html', {'comic': comic,
             'latest_comic': latest_comic, 'first_comic': first_comic,
-            'comment_form': comment_form},
+            'comment_form': comment_form, 'comments': comments},
             context_instance=RequestContext(request))
 
 def archive(request):

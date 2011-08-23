@@ -78,7 +78,7 @@
 					{% if comment.website %}<a href="{{ comment.website }}">{{ comment.name }}</a>{% else %}{{ comment.name }}{% endif %}
 					<span class="date">{{ comment.date }}</span>
 				</div>
-				<pre>{{ comment }}</pre></li>
+				<div class="comment">{{ comment.comment }}</div></li>
 			{% endfor %}
 		</ul>
 		{% endif %}

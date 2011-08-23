@@ -331,6 +331,17 @@ ul.errorlist
 	float:right;
 }
 
+#comments ul.comments li
+{
+	list-style:none;
+}
+
+#comments ul.comments li .meta
+{
+	color:rgba(255,255,255,0.5);
+	font:normal 14px/1.25em Helvetica,Arial,sans-serif;
+}
+
 #footer
 {
 	position:relative;

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from comics.models import Comic
+from comics.models import Comic, Comment
 import os
 
 class ComicAdmin(admin.ModelAdmin):
@@ -14,4 +14,9 @@ class ComicAdmin(admin.ModelAdmin):
         obj.image.save(obj.slug + ext, obj.image)
         os.unlink(old_file)
 
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('comic', 'name', 'email', 'date', 'approved')
+    date_heirarchy = 'date'
+
 admin.site.register(Comic, ComicAdmin)
+admin.site.register(Comment, CommentAdmin)
