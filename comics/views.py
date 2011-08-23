@@ -3,7 +3,7 @@ from django.template import RequestContext
 from django.contrib.syndication.views import Feed
 from django.utils import feedgenerator
 from comics.models import Comic
-from comics.forms import CommentForm
+from comics.forms import CommentForm, ContactForm
 
 # Create your views here.
 def comic(request, comic_id=None, lookup='slug'):
@@ -45,6 +45,32 @@ def comic(request, comic_id=None, lookup='slug'):
 def archive(request):
     comics = Comic.objects.all()
     return render_to_response('comics/archive.html', {'comics': comics},
+            context_instance=RequestContext(request))
+
+def contact(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            from django.core.mail import EmailMessage
+
+            email = form.cleaned_data['email']
+            name = form.cleaned_data['name']
+            message = form.cleaned_data['message']
+            sender = 'zombiewalrusdetective.com' \
+                    ' <contact@zombiewalrusdetective.com>'
+            subject = '{} has sent a message!'.format(name)
+            body = 'Email: {}\n\n{}'.format(email, message)
+            recipients = ['joe@zombiewalrusdetective.com']
+
+            email = EmailMessage(subject, body, sender, recipients,
+                       headers={'Reply-to': email})
+            email.send()
+
+            return redirect('contact')
+    else:
+        form = ContactForm()
+
+    return render_to_response('contact.html', {'contact_form': form},
             context_instance=RequestContext(request))
 
 class ComicRSS(Feed):

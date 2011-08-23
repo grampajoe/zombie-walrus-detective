@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block pretitle %}Contact - {% endblock %}
+{% block content %}
+<h3 id="contact">Contact</h3>
+<form action="{% url contact %}" method="POST" id="contact_form" class="bubble contact">
+	<p><strong>What's-a matta?</strong> If you have something to say or ask or anything, please do it! This is the form you do it with. Do it with this form.</p>
+	{% if form.errors %}
+	<ul class="errors">
+		{% for error in errors %}
+		<li>{{ error }}</li>
+		{% endfor %}
+	</ul>
+	{% endif %}
+	{% csrf_token %}
+	{% for field in contact_form %}
+	<div>{{ field.label_tag }}{{ field.errors }}{{ field }}</div>
+	{% endfor %}
+	<div><input type="submit" class="submit" value="Send" /></div>
+</form>
+{% endblock %}
