@@ -3,6 +3,7 @@ from django.template import RequestContext
 from django.contrib.syndication.views import Feed
 from django.utils import feedgenerator
 from comics.models import Comic
+from comics.forms import CommentForm
 
 # Create your views here.
 def comic(request, comic_id=None, lookup='slug'):
@@ -20,8 +21,25 @@ def comic(request, comic_id=None, lookup='slug'):
             return redirect(comic)
     else:
         comic = latest_comic
+
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            name = comment_form.cleaned_data['name']
+            email = comment_form.cleaned_data['email']
+            website = comment_form.cleaned_data['website']
+            comment = comment_form.cleaned_data['comment']
+
+            c = Comment.objects.create(name=name, email=email, website=website,
+                    comment=comment, comic=comic)
+
+            return redirect(comic.get_absolute_url()+'?comment='+c.pk+'#comments')
+    else:
+        comment_form = CommentForm()
+
     return render_to_response('comics/comic_detail.html', {'comic': comic,
-            'latest_comic': latest_comic, 'first_comic': first_comic},
+            'latest_comic': latest_comic, 'first_comic': first_comic,
+            'comment_form': comment_form},
             context_instance=RequestContext(request))
 
 def archive(request):

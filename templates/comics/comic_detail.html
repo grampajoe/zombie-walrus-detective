@@ -40,5 +40,15 @@
 		</div>
 	</div>
 	<script type="text/javascript" src="{{ MEDIA_URL }}js/share.js"></script>
+	<div id="comments">
+		<form action="{{ comic.get_absolute_url }}#comments" method="POST">
+			{% csrf_token %}
+			<h4>Leave a Comment</h4>
+			{% for field in comment_form %}
+			<div>{{ field.label_tag }}{{ field.errors }}{{ field }}</div>
+			{% endfor %}
+			<div><input type="submit" class="submit" value="Comment" /></div>
+		</form>
+	</div>
 </div>
 {% endblock %}
