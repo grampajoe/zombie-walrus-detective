@@ -1,4 +1,4 @@
-* { margin:0; padding:0; }
+* { margin:0; padding:0; border:0; }
 
 body
 {
@@ -38,6 +38,12 @@ h1 a
 	width:800px;
 	background:transparent url(../images/header.png) top center no-repeat;
 	text-indent:-10000px;
+}
+
+h4
+{
+	font:normal 16px/1.25em Helvetica,Arial,sans-serif;
+	margin:0 0 10px;
 }
 
 p
@@ -233,7 +239,12 @@ h3.about
 label
 {
 	display:block;
-	font:bold 16px/1.25em Helvetica,Arial,sans-serif;
+	font:normal 14px/1.25em Helvetica,Arial,sans-serif;
+}
+
+label.required
+{
+	font-weight:bold;
 }
 
 input,
@@ -246,7 +257,7 @@ textarea
 	box-shadow:rgba(0,0,0,0.4) 1px 1px 2px inset;
 	-webkit-box-shadow:rgba(0,0,0,0.4) 1px 1px 2px inset;
 	background:rgba(255,255,255,0.9);
-	font:normal 16px/1.25em Helvetica,Arial,sans-serif;
+	font:normal 14px/1.25em Helvetica,Arial,sans-serif;
 }
 
 input:focus,
@@ -285,6 +296,39 @@ ul.errorlist
 	list-style:none;
 	font:normal 14px/1.25em Helvetica,Arial,sans-serif;
 	color:#faa;
+}
+
+#comments
+{
+	margin:20px 0 0;
+}
+
+#comments fieldset.author
+{
+	float:left;
+	width:276px;
+}
+
+#comments fieldset.comment
+{
+	width:364px;
+	margin:0 0 0 296px;
+}
+
+#comments fieldset.comment textarea
+{
+	height:133px;
+	width:346px;
+}
+
+#comments div.submit
+{
+	text-align:right;
+}
+
+#comments ul.errorlist
+{
+	float:right;
 }
 
 #footer

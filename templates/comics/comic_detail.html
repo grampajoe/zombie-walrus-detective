@@ -44,11 +44,44 @@
 		<form action="{{ comic.get_absolute_url }}#comments" method="POST">
 			{% csrf_token %}
 			<h4>Leave a Comment</h4>
-			{% for field in comment_form %}
-			<div>{{ field.label_tag }}{{ field.errors }}{{ field }}</div>
-			{% endfor %}
-			<div><input type="submit" class="submit" value="Comment" /></div>
+			<fieldset class="author">
+				<div>
+					{{ comment_form.name.errors }}
+					<label class="required">{{ comment_form.name.label }}</label>
+					{{ comment_form.name }}
+				</div>
+				<div>
+					{{ comment_form.email.errors }}
+					<label class="required">{{ comment_form.email.label }}</label>
+					{{ comment_form.email }}
+				</div>
+				<div>
+					{{ comment_form.website.errors }}
+					<label>{{ comment_form.website.label }}</label>
+					{{ comment_form.website }}
+				</div>
+			</fieldset>
+			<fieldset class="comment">
+				<div>
+					{{ comment_form.comment.errors }}
+					<label class="required">{{ comment_form.comment.label }}</label>
+					{{ comment_form.comment }}
+				</div>
+			</fieldset>
+			<div class="submit"><input type="submit" class="submit" value="Post Comment" /></div>
 		</form>
+		{% if comments %}
+		<ul class="comments">
+			{% for comment in comments %}
+			<li id="comment_{{ comment.pk }}">
+				<div class="meta">
+					{% if comment.website %}<a href="{{ comment.website }}">{{ comment.name }}</a>{% else %}{{ comment.name }}{% endif %}
+					<span class="date">{{ comment.date }}</span>
+				</div>
+				<pre>{{ comment }}</pre></li>
+			{% endfor %}
+		</ul>
+		{% endif %}
 	</div>
 </div>
 {% endblock %}

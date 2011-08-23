@@ -2,7 +2,7 @@ from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
 from django.contrib.syndication.views import Feed
 from django.utils import feedgenerator
-from comics.models import Comic
+from comics.models import Comic, Comment
 from comics.forms import CommentForm, ContactForm
 
 # Create your views here.
@@ -33,7 +33,7 @@ def comic(request, comic_id=None, lookup='slug'):
             c = Comment.objects.create(name=name, email=email, website=website,
                     comment=comment, comic=comic)
 
-            return redirect(comic.get_absolute_url()+'?comment='+c.pk+'#comments')
+            return redirect(comic.get_absolute_url()+'?comment='+str(c.pk)+'#comments')
     else:
         comment_form = CommentForm()
 
