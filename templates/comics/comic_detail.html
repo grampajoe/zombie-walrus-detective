@@ -41,9 +41,9 @@
 	</div>
 	<script type="text/javascript" src="{{ MEDIA_URL }}js/share.js"></script>
 	<div id="comments">
+		<h4>Feedback</h4>
 		<form action="{{ comic.get_absolute_url }}#comments" method="POST">
 			{% csrf_token %}
-			<h4>Leave a Comment</h4>
 			<fieldset class="author">
 				<div>
 					{{ comment_form.name.errors }}
@@ -75,6 +75,7 @@
 			{% for comment in comments %}
 			<li id="comment_{{ comment.pk }}">
 				<div class="meta">
+					<img src="{{ comment.get_gravatar_url }}" alt="{{ comment.name }}'s Gravatar" />
 					{% if comment.website %}<a href="{{ comment.website }}">{{ comment.name }}</a>{% else %}{{ comment.name }}{% endif %}
 					<span class="date">{{ comment.date }}</span>
 				</div>

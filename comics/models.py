@@ -1,6 +1,8 @@
 from django.db import models
 import datetime
 import os
+import urllib
+import hashlib
 
 class Comic(models.Model):
     image = models.ImageField(upload_to='comics')
@@ -57,3 +59,11 @@ class Comment(models.Model):
     website = models.URLField(blank=True)
     comment = models.TextField()
     approved = models.BooleanField(default=False)
+
+    gravatar_size = 40
+
+    def get_gravatar_url(self):
+        url = 'http://www.gravatar.com/avatar/' + \
+                hashlib.md5(self.email.lower()).hexdigest()
+        url += '?' + urllib.urlencode({'s': str(self.gravatar_size)})
+        return url
