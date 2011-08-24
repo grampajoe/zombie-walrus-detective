@@ -2,6 +2,7 @@ from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
 from django.contrib.syndication.views import Feed
 from django.utils import feedgenerator
+from django.db.models import Q
 from comics.models import Comic, Comment
 from comics.forms import CommentForm, ContactForm
 
@@ -33,11 +34,16 @@ def comic(request, comic_id=None, lookup='slug'):
             c = Comment.objects.create(name=name, email=email, website=website,
                     comment=comment, comic=comic)
 
-            return redirect(comic.get_absolute_url()+'?comment='+str(c.pk)+'#comments')
+            submitted = request.session.get('comments_submitted', [])
+            submitted.append(c.pk)
+            request.session['comments_submitted'] = submitted
+
+            return redirect(comic.get_absolute_url()+'#comment_'+str(c.pk))
     else:
         comment_form = CommentForm()
 
-    comments = comic.comment_set.filter(approved=True)
+    comments = comic.comment_set.filter(Q(approved=True) |
+            Q(pk__in=request.session.get('comments_submitted', [])))
 
     return render_to_response('comics/comic_detail.html', {'comic': comic,
             'latest_comic': latest_comic, 'first_comic': first_comic,

@@ -65,5 +65,8 @@ class Comment(models.Model):
     def get_gravatar_url(self):
         url = 'http://www.gravatar.com/avatar/' + \
                 hashlib.md5(self.email.lower()).hexdigest()
-        url += '?' + urllib.urlencode({'s': str(self.gravatar_size)})
+        url += '?' + urllib.urlencode({'s': str(self.gravatar_size), 'd': 'mm'})
         return url
+
+    class Meta:
+        ordering = ['date']
