@@ -75,7 +75,7 @@
 			{% for comment in comments %}
 			<li id="comment_{{ comment.pk }}">
 				<div class="meta">
-					<img src="{{ comment.get_gravatar_url }}" alt="{{ comment.name }}'s Gravatar" />
+					<a href="http://gravatar.com"><img src="{{ comment.get_gravatar_url }}" alt="{{ comment.name }}'s Gravatar" /></a>
 					{% if comment.website %}<a href="{{ comment.website }}">{{ comment.name }}</a>{% else %}{{ comment.name }}{% endif %}
 					<span class="date">{{ comment.date }}</span>
 					{% if not comment.approved %}<abbr class="approval" title="We just want to make sure you're not selling anything!">Awaiting approval!</abbr>{% endif %}

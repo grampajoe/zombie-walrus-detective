@@ -6,12 +6,21 @@ from django.db.models import Q
 from comics.models import Comic, Comment
 from comics.forms import CommentForm, ContactForm
 
-# Create your views here.
 def comic(request, comic_id=None, lookup='slug'):
+    """Show a comic!!!
+    
+    Comics can be looked up by id or slug, to preserve backwards compatibility.
+    If neither are provided, the latest comic will be shown.
+
+    POSTing to one o' these URLs posts a comment. No user accounts are used, so
+    posted but unapproved comments are stored in the session, as well as values
+    for the name, email, and website fields.
+    """
     try:
         latest_comic = Comic.objects.all()[0]
         first_comic = Comic.objects.all().reverse()[0]
     except IndexError:
+        # No comics somehow!
         latest_comic = None
         first_comic = None
     if comic_id is not None:
@@ -37,10 +46,12 @@ def comic(request, comic_id=None, lookup='slug'):
             submitted = request.session.get('comments_submitted', [])
             submitted.append(c.pk)
             request.session['comments_submitted'] = submitted
+            request.session['comments_profile'] = {'name': name, 'email': email,
+                    'website': website}
 
             return redirect(comic.get_absolute_url()+'#comment_'+str(c.pk))
     else:
-        comment_form = CommentForm()
+        comment_form = CommentForm(initial=request.session.get('comments_profile', {}))
 
     comments = comic.comment_set.filter(Q(approved=True) |
             Q(pk__in=request.session.get('comments_submitted', [])))
