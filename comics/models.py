@@ -68,5 +68,8 @@ class Comment(models.Model):
         url += '?' + urllib.urlencode({'s': str(self.gravatar_size), 'd': 'mm'})
         return url
 
+    def get_absolute_url(self):
+        return self.comic.get_absolute_url() + '#comment_' + str(self.id)
+
     class Meta:
         ordering = ['date']

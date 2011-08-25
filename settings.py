@@ -4,11 +4,14 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
     ('Joe Friedl', 'zombiewalrus@joefriedl.net'),
+    #('Natalie Preston', 'n.preston.arts@gmail.com'),
 )
 
 MANAGERS = ADMINS
+
+EMAIL_SUBJECT_PREFIX = ''
+SERVER_EMAIL = 'Zombie Walrus Detective <zombie@zombiewalrusdetective.com>'
 
 DATABASES = {
     'default': {

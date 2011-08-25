@@ -78,7 +78,14 @@
 					<a href="http://gravatar.com"><img src="{{ comment.get_gravatar_url }}" alt="{{ comment.name }}'s Gravatar" /></a>
 					{% if comment.website %}<a href="{{ comment.website }}">{{ comment.name }}</a>{% else %}{{ comment.name }}{% endif %}
 					<span class="date">{{ comment.date }}</span>
-					{% if not comment.approved %}<abbr class="approval" title="We just want to make sure you're not selling anything!">Awaiting approval!</abbr>{% endif %}
+					{% if not comment.approved %}<abbr class="approval" title="We just want to make sure you're not selling anything!">Awaiting approval!</abbr>
+						{% if user and user.is_authenticated and user.is_staff %}
+						<a href="{% url approve_comment comment.pk %}">Approve</a>
+						{% endif %}
+					{% endif %}
+					{% if user and user.is_authenticated and user.is_staff %}
+					<a href="{% url delete_comment comment.pk %}">Delete</a>
+					{% endif %}
 				</div>
 				<div class="comment">{{ comment.comment }}</div></li>
 			{% endfor %}

@@ -3,6 +3,7 @@ from django.template import RequestContext
 from django.contrib.syndication.views import Feed
 from django.utils import feedgenerator
 from django.db.models import Q
+from django.core.mail import mail_admins
 from comics.models import Comic, Comment
 from comics.forms import CommentForm, ContactForm
 
@@ -43,23 +44,49 @@ def comic(request, comic_id=None, lookup='slug'):
             c = Comment.objects.create(name=name, email=email, website=website,
                     comment=comment, comic=comic)
 
+            # Add comment to session's submitted comments, save user info
             submitted = request.session.get('comments_submitted', [])
             submitted.append(c.pk)
             request.session['comments_submitted'] = submitted
             request.session['comments_profile'] = {'name': name, 'email': email,
                     'website': website}
 
+            # Email to admins
+            subject = '{} commented on {}'.format(name, comic.title)
+            message = 'Name: {}\nEmail: {}\nWebsite: {}\nComment: {}\n\nTo approve/deny: '.format(
+                    name, email, website, comment) + 'http://zombiewalrusdetective.com/omgsickbro/'
+            mail_admins(subject, message)
+
             return redirect(comic.get_absolute_url()+'#comment_'+str(c.pk))
     else:
         comment_form = CommentForm(initial=request.session.get('comments_profile', {}))
 
-    comments = comic.comment_set.filter(Q(approved=True) |
-            Q(pk__in=request.session.get('comments_submitted', [])))
+    if request.user and request.user.is_authenticated() and \
+            request.user.is_staff:
+        comments = comic.comment_set.all()
+    else:
+        comments = comic.comment_set.filter(Q(approved=True) |
+                Q(pk__in=request.session.get('comments_submitted', [])))
 
     return render_to_response('comics/comic_detail.html', {'comic': comic,
             'latest_comic': latest_comic, 'first_comic': first_comic,
             'comment_form': comment_form, 'comments': comments},
             context_instance=RequestContext(request))
+
+def approve_comment(request, comment_id):
+    comment = get_object_or_404(Comment, pk=comment_id)
+    if request.user and request.user.is_authenticated() and \
+            request.user.is_staff:
+        comment.approved = True
+        comment.save()
+    return redirect(comment)
+
+def delete_comment(request, comment_id):
+    comment = get_object_or_404(Comment, pk=comment_id)
+    if request.user and request.user.is_authenticated() and \
+            request.user.is_staff:
+        comment.delete()
+    return redirect(comment.comic.get_absolute_url() + '#comments')
 
 def archive(request):
     comics = Comic.objects.all()
