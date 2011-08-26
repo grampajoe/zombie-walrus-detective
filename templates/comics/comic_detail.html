@@ -2,7 +2,7 @@
 {% block title %} in "{{ comic.title }}"{% endblock %}
 {% block content %}
 {% if comic.next %}<a href="{{ comic.next.get_absolute_url }}">{% endif %}
-<img class="comic" src="{{ MEDIA_URL }}{{ comic.image }}" alt="Zombie Walrus Detective in &quot;{{ comic.title }}&quot;" title="Zombie Walrus Detective in &quot;{{ comic.title }}&quot;" />
+	<img width="{{ comic.image.width }}" height="{{ comic.image.height }}" class="comic" src="{{ MEDIA_URL }}{{ comic.image }}" alt="Zombie Walrus Detective in &quot;{{ comic.title }}&quot;" title="Zombie Walrus Detective in &quot;{{ comic.title }}&quot;" />
 {% if comic.next %}</a>{% endif %}
 <ul id="nav">
 	<li class="first">{% if first_comic %}<a href="{{ first_comic.get_absolute_url }}">First</a>{% else %}First{% endif %}</li>
@@ -75,7 +75,7 @@
 			{% for comment in comments %}
 			<li id="comment_{{ comment.pk }}">
 				<div class="meta">
-					<a href="http://gravatar.com"><img src="{{ comment.get_gravatar_url }}" alt="{{ comment.name }}'s Gravatar" /></a>
+					<a href="http://gravatar.com"><img width="40" height="40" src="{{ comment.get_gravatar_url }}" alt="{{ comment.name }}'s Gravatar" /></a>
 					{% if comment.website %}<a href="{{ comment.website }}">{{ comment.name }}</a>{% else %}{{ comment.name }}{% endif %}
 					<span class="date">{{ comment.date }}</span>
 					{% if not comment.approved %}<abbr class="approval" title="We just want to make sure you're not selling anything!">Awaiting approval!</abbr>
