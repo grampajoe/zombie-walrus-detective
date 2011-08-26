@@ -52,8 +52,8 @@ def comic(request, comic_id=None, lookup='slug'):
                     'website': website}
 
             # Email to admins
-            subject = '{} commented on {}'.format(name, comic.title)
-            message = 'Name: {}\nEmail: {}\nWebsite: {}\nComment: {}\n\nTo approve/deny: '.format(
+            subject = '{0} commented on {1}'.format(name, comic.title)
+            message = 'Name: {0}\nEmail: {1}\nWebsite: {2}\nComment: {3}\n\nTo approve/deny: '.format(
                     name, email, website, comment) + 'http://zombiewalrusdetective.com/omgsickbro/'
             mail_admins(subject, message)
 
@@ -104,8 +104,8 @@ def contact(request):
             message = form.cleaned_data['message']
             sender = 'zombiewalrusdetective.com' \
                     ' <contact@zombiewalrusdetective.com>'
-            subject = '{} has sent a message!'.format(name)
-            body = 'Email: {}\n\n{}'.format(email, message)
+            subject = '{0} has sent a message!'.format(name)
+            body = 'Email: {0}\n\n{1}'.format(email, message)
             recipients = ['joe@zombiewalrusdetective.com']
 
             email = EmailMessage(subject, body, sender, recipients,
