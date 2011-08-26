@@ -52,9 +52,11 @@ def comic(request, comic_id=None, lookup='slug'):
                     'website': website}
 
             # Email to admins
+            approve_url = 'http://zombiewalrusdetective.com{0}#comments'.format(
+                    comic.get_absolute_url())
             subject = '{0} commented on {1}'.format(name, comic.title)
-            message = 'Name: {0}\nEmail: {1}\nWebsite: {2}\nComment: {3}\n\nTo approve/deny: '.format(
-                    name, email, website, comment) + 'http://zombiewalrusdetective.com/omgsickbro/'
+            message = 'Name: {0}\nEmail: {1}\nWebsite: {2}\nComment: {3}\n\nTo approve/deny: {4}'.format(
+                    name, email, website, comment, approve_url)
             mail_admins(subject, message)
 
             return redirect(comic.get_absolute_url()+'#comment_'+str(c.pk))
