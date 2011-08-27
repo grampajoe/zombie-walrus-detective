@@ -332,6 +332,12 @@ ul.errorlist
 	text-align:right;
 }
 
+#comments div.submit a
+{
+	float:left;
+	font-size:14px;
+}
+
 #comments ul.errorlist
 {
 	float:right;

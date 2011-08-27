@@ -25,6 +25,10 @@ def comic(request, comic_id=None, lookup='slug'):
     else:
         public = {'public': True}
 
+    # Forget user details
+    if request.GET.get('forget', False) is not False:
+        request.session['comments_profile'] = {}
+
     try:
         latest_comic = Comic.objects.filter(**public)[0]
         first_comic = Comic.objects.filter(**public).reverse()[0]

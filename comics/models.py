@@ -63,11 +63,16 @@ class Comment(models.Model):
 
     gravatar_size = 40
 
-    def get_gravatar_url(self):
+    def get_gravatar_url(self, default='identicon'):
         url = 'http://www.gravatar.com/avatar/' + \
                 hashlib.md5(self.email.lower()).hexdigest()
-        url += '?' + urllib.urlencode({'s': str(self.gravatar_size), 'd': 'mm'})
+        url += '?' + urllib.urlencode({'s': str(self.gravatar_size), 'd':
+            default})
         return url
+
+    def get_gravatar_profile_url(self):
+        return 'http://www.gravatar.com/' + \
+                hashlib.md5(self.email.lower()).hexdigest()
 
     def get_absolute_url(self):
         return self.comic.get_absolute_url() + '#comment_' + str(self.id)
