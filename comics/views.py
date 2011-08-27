@@ -2,6 +2,7 @@ from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
 from django.contrib.syndication.views import Feed
 from django.utils import feedgenerator
+from django.http import Http404
 from django.db.models import Q
 from django.core.mail import mail_admins
 from comics.models import Comic, Comment
@@ -17,21 +18,30 @@ def comic(request, comic_id=None, lookup='slug'):
     posted but unapproved comments are stored in the session, as well as values
     for the name, email, and website fields.
     """
+    # If the user is an admin, don't filter out public=False
+    if request.user and request.user.is_authenticated() and \
+            request.user.is_staff:
+        public = {}
+    else:
+        public = {'public': True}
+
     try:
-        latest_comic = Comic.objects.all()[0]
-        first_comic = Comic.objects.all().reverse()[0]
+        latest_comic = Comic.objects.filter(**public)[0]
+        first_comic = Comic.objects.filter(**public).reverse()[0]
     except IndexError:
         # No comics somehow!
         latest_comic = None
         first_comic = None
     if comic_id is not None:
         if lookup == 'slug':
-            comic = get_object_or_404(Comic, slug=comic_id)
+            comic = get_object_or_404(Comic, slug=comic_id, **public)
         else:
-            comic = get_object_or_404(Comic, pk=comic_id)
+            comic = get_object_or_404(Comic, pk=comic_id, **public)
             return redirect(comic)
-    else:
+    elif latest_comic is not None:
         comic = latest_comic
+    else:
+        raise Http404
 
     if request.method == 'POST':
         comment_form = CommentForm(request.POST)
@@ -91,7 +101,7 @@ def delete_comment(request, comment_id):
     return redirect(comment.comic.get_absolute_url() + '#comments')
 
 def archive(request):
-    comics = Comic.objects.all()
+    comics = Comic.objects.filter(public=True)
     return render_to_response('comics/archive.html', {'comics': comics},
             context_instance=RequestContext(request))
 
@@ -129,7 +139,7 @@ class ComicRSS(Feed):
     feed_type = feedgenerator.Rss201rev2Feed
 
     def items(self):
-        return Comic.objects.all()
+        return Comic.objects.filter(public=True)
 
     def item_title(self, item):
         return item.title

@@ -10,6 +10,7 @@ class Comic(models.Model):
     slug = models.SlugField()
     date = models.DateTimeField(default=datetime.datetime.now)
     description = models.TextField(blank=True)
+    public = models.BooleanField(default=False)
 
     date_format = 'F jS, Y'
 
