@@ -1,24 +1,18 @@
 (function(){
-	var share_button = document.getElementById('share_button');
-	var share_box = document.getElementById('share');
-	
-	function getPos(obj)
-	{
-		var pos = [0,0];
-		if (obj.offsetParent)
-		{
-			do {
-				pos = [pos[0] + obj.offsetLeft, pos[1] + obj.offsetTop];
-			} while (obj = obj.offsetParent);
-		}
-		return pos;
-	}
+	var share_button = $('#share_button');
+	var share_box = $('#share');
 
-	share_button.onclick = function(){
-		var pos = getPos(share_button);
-		share_box.style.left = pos[0] + 'px';
-		share_box.style.top = (pos[1] + 20) + 'px';
-		share_box.style.display = (share_box.style.display == 'block') ? 'none' : 'block';
+	$(share_button).click(function(){
+		var pos = $(share_button).position();
+		$(share_box).css('left', pos.left + 'px');
+		$(share_box).css('top', (pos.top + 20) + 'px');
+		$(share_box).toggle();
 		return false;
-	};
+	});
+
+	$(document.body).click(function(){
+		$(share_box).hide();
+	});
+
+	$(share_box).click(function(){ return false; });
 })();

@@ -346,8 +346,14 @@ ul.errorlist
 #comments ul.comments li
 {
 	margin:30px 0 0;
-	padding:20px 0 0;
+	padding:10px;
 	list-style:none;
+}
+
+#comments ul.comments li.active
+{
+	background:rgba(0,0,0,0.3);
+	border-radius:10px;
 }
 
 #comments .meta
@@ -378,7 +384,7 @@ ul.errorlist
 
 #comments .comment
 {
-	margin:0 0 10px 50px;
+	margin:0 0 0 50px;
 }
 
 #footer

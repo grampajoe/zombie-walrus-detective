@@ -85,7 +85,7 @@
 					{% if user and user.is_authenticated and user.is_staff %}
 					&lt;{{ comment.email }}&gt;
 					{% endif %}
-					<span class="date">{{ comment.date }}</span>
+					<a class="date" href="{{ comment.get_absolute_url }}">{{ comment.date }}</a>
 					{% if not comment.approved %}<abbr class="approval" title="We just want to make sure you're not selling anything!">Awaiting approval!</abbr>
 					{% endif %}
 					{% if user and user.is_authenticated and user.is_staff %}
@@ -100,5 +100,6 @@
 		</ul>
 		{% endif %}
 	</div>
+	<script type="text/javascript" src="{{ MEDIA_URL }}js/comments.js"></script>
 </div>
 {% endblock %}
