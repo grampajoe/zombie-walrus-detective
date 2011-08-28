@@ -22,7 +22,7 @@ class Comic(models.Model):
         except AttributeError:
             try:
                 # Cache that
-                self.__next = Comic.objects.filter(
+                self.__next = Comic.objects.filter(public=True,
                         date__gte=self.date).exclude(pk=self.pk).reverse()[0]
                 return self.__next
             except IndexError:
@@ -36,7 +36,7 @@ class Comic(models.Model):
         except AttributeError:
             try:
                 # Cache that
-                self.__previous = Comic.objects.filter(
+                self.__previous = Comic.objects.filter(public=True,
                         date__lte=self.date).exclude(pk=self.pk)[0]
                 return self.__previous
             except IndexError:
