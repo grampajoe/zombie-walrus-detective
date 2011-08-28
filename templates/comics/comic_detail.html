@@ -14,7 +14,7 @@
 </ul>
 <div class="meta bubble">
 	{% if comic.description %}
-	<div class="description">{{ comic.description }}</div>
+	<div class="description">{{ comic.description|safe }}</div>
 	{% endif %}
 	<div class="data">
 		<span class="date">{{ comic.date|date:comic.date_format }}</span>
