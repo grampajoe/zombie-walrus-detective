@@ -10,8 +10,8 @@ class ComicAdmin(admin.ModelAdmin):
 
     def save_model(self, request, obj, form, change):
         base, ext = os.path.splitext(obj.image.name)
-        old_file = obj.image.path[:]
-        obj.image.save(obj.slug + ext, obj.image)
+        if (base != obj.slug):
+            obj.image.save(obj.slug + ext, obj.image)
 
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('comic', 'name', 'email', 'date', 'approved')
