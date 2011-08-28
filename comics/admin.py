@@ -8,11 +8,6 @@ class ComicAdmin(admin.ModelAdmin):
     date_hierarchy = 'date'
     prepopulated_fields = {'slug': ('title',)}
 
-    def save_model(self, request, obj, form, change):
-        base, ext = os.path.splitext(obj.image.name)
-        if (base != obj.slug):
-            obj.image.save(obj.slug + ext, obj.image)
-
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('comic', 'name', 'email', 'date', 'approved')
     date_heirarchy = 'date'

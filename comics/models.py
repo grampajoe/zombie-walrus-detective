@@ -42,6 +42,15 @@ class Comic(models.Model):
             except IndexError:
                 return None
 
+    def save(self):
+        super(Comic, self).save()
+        base, ext = os.path.splitext(self.image.name)
+        os.rename(self.image.path, os.path.dirname(self.image.path) + '/' +
+                self.slug + ext)
+        self.image.name = os.path.dirname(self.image.name) + '/' + self.slug \
+                + ext
+        super(Comic, self).save()
+
     @models.permalink
     def get_absolute_url(self):
         return ('comic', [self.slug])
