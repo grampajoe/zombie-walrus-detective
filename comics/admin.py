@@ -1,6 +1,5 @@
 from django.contrib import admin
 from comics.models import Comic, Comment
-import os
 
 class ComicAdmin(admin.ModelAdmin):
     list_display = ('title', 'date')
