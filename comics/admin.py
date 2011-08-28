@@ -12,7 +12,6 @@ class ComicAdmin(admin.ModelAdmin):
         base, ext = os.path.splitext(obj.image.name)
         old_file = obj.image.path[:]
         obj.image.save(obj.slug + ext, obj.image)
-        os.unlink(old_file)
 
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('comic', 'name', 'email', 'date', 'approved')
