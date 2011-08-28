@@ -128,7 +128,7 @@ def contact(request):
                        headers={'Reply-to': email})
             email.send()
 
-            return redirect('contact')
+            return redirect('contact_thanks')
     else:
         form = ContactForm()
 

@@ -40,66 +40,6 @@
 		</div>
 	</div>
 	<script type="text/javascript" src="{{ MEDIA_URL }}js/share.js"></script>
-	<div id="comments">
-		<h4>Feedback</h4>
-		<form action="{{ comic.get_absolute_url }}#comments" method="POST">
-			{% csrf_token %}
-			<fieldset class="author">
-				<div>
-					{{ comment_form.name.errors }}
-					<label class="required">{{ comment_form.name.label }}</label>
-					{{ comment_form.name }}
-				</div>
-				<div>
-					{{ comment_form.email.errors }}
-					<label class="required">{{ comment_form.email.label }}</label>
-					{{ comment_form.email }}
-				</div>
-				<div>
-					{{ comment_form.website.errors }}
-					<label>{{ comment_form.website.label }}</label>
-					{{ comment_form.website }}
-				</div>
-			</fieldset>
-			<fieldset class="comment">
-				<div>
-					{{ comment_form.comment.errors }}
-					<label class="required">{{ comment_form.comment.label }}</label>
-					{{ comment_form.comment }}
-				</div>
-			</fieldset>
-			<div class="submit">
-				{% if comment_form.initial %}
-				<a href="?forget#comments">Forget Me</a>
-				{% endif %}
-				<input type="submit" class="submit" value="Post Comment" />
-			</div>
-		</form>
-		{% if comments %}
-		<ul class="comments">
-			{% for comment in comments %}
-			<li id="comment_{{ comment.pk }}">
-				<div class="meta">
-					<a href="{{ comment.get_gravatar_profile_url }}" onclick="window.open(this.href); return false;"><img width="40" height="40" src="{{ comment.get_gravatar_url }}" alt="{{ comment.name }}'s Gravatar" title="{{ comment.name }}'s Gravatar" /></a>
-					{% if comment.website %}<a href="{{ comment.website }}">{{ comment.name }}</a>{% else %}{{ comment.name }}{% endif %}
-					{% if user and user.is_authenticated and user.is_staff %}
-					&lt;{{ comment.email }}&gt;
-					{% endif %}
-					<a class="date" href="{{ comment.get_absolute_url }}">{{ comment.date }}</a>
-					{% if not comment.approved %}<abbr class="approval" title="We just want to make sure you're not selling anything!">Awaiting approval!</abbr>
-					{% endif %}
-					{% if user and user.is_authenticated and user.is_staff %}
-						{% if not comment.approved %}
-					<a href="{% url approve_comment comment.pk %}">Approve</a>
-						{% endif %}
-					<a href="{% url delete_comment comment.pk %}">Delete</a>
-					{% endif %}
-				</div>
-				<div class="comment">{{ comment.comment }}</div></li>
-			{% endfor %}
-		</ul>
-		{% endif %}
-	</div>
-	<script type="text/javascript" src="{{ MEDIA_URL }}js/comments.js"></script>
+	{% include 'comics/comments.html' with comic=comic comment_form=comment_form comments=comments %}
 </div>
 {% endblock %}
