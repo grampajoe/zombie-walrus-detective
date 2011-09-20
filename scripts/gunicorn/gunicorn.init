@@ -1,0 +1,77 @@
+#!/bin/sh 
+
+### BEGIN INIT INFO
+# Provides:       gunicorn_zombiewalrus
+# Required-Start: $local_fs $syslog
+# Required-Stop:  $local_fs $syslog
+# Default-Start:  2 3 4 5
+# Default-Stop:   0 1 6
+# Short-Description: Gunicorn processes for zombiewalrusdetective.com
+### END INIT INFO
+
+USER=www-data
+GROUP=www-data
+NAME=gunicorn_zombiewalrus
+PIDFILE=/var/run/gunicorn/zombiewalrus.pid
+
+HOST="127.0.0.1:8083"
+ENV_LOCATION=/var/www/django/zombiewalrus/env
+PROJECT_LOCATION=/var/www/django/zombiewalrus
+PROJECT_SETTINGS=$PROJECT_LOCATION/live_settings.py
+ENV_ACTIVATE=$ENV_LOCATION/bin/activate
+
+DAEMON=$ENV_LOCATION/bin/gunicorn_django
+DAEMON_ARGS="-b $HOST -D -p $PIDFILE --user=$USER --group=$GROUP $PROJECT_SETTINGS"
+
+# source function library
+. /lib/lsb/init-functions
+
+
+case "$1" in
+  start)
+	if [ -f $PIDFILE ]
+	then
+		PID=`cat $PIDFILE`
+		if [ `ps -p $PID | wc -l` -gt 1 ]
+		then
+			echo "Already running."
+		fi
+	else
+		echo -n "Starting $NAME: "
+		touch $PIDFILE
+		chown $USER:$GROUP $PIDFILE
+		cd $PROJECT_LOCATION
+		. $VENV_ACTIVATE
+		if $DAEMON $DAEMON_ARGS
+		then
+			echo 'OK'
+		else
+			echo 'FAILED'
+		fi
+	fi
+	;;
+  stop)
+	if [ -f $PIDFILE ]
+	then
+		echo -n "Stopping $NAME: "
+		if kill -9 `cat $PIDFILE`
+		then
+			rm -f $PIDFILE
+			echo 'OK'
+		else
+			echo 'FAILED'
+		fi
+	else
+		echo 'Server not running.'
+	fi
+	;;
+  restart|force-reload)
+	${0} stop
+	${0} start
+	;;
+  *)
+        echo "Usage: $0 {start|stop|restart|force-reload}" >&2
+	exit 1
+esac
+
+exit 0
