@@ -10,7 +10,7 @@
 ### END INIT INFO
 
 USER=www-data
-GROUP=www-data
+GROUP=developers
 NAME=gunicorn_zombiewalrus
 PIDFILE=/var/run/gunicorn/zombiewalrus.pid
 
