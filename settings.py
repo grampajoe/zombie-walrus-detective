@@ -124,6 +124,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'zombiewalrus.comics',
+    'django_nose',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -148,3 +149,5 @@ LOGGING = {
         },
     }
 }
+
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
