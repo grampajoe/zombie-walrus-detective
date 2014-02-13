@@ -19,26 +19,6 @@
 	<div class="data">
 		<span class="date">{{ comic.date|date:comic.date_format }}</span>
 		<a href="{{ comic.get_absolute_url }}">Permalink</a>
-		<a href="{{ comic.get_absolute_url }}" id="share_button">Share</a>
 	</div>
-	<div id="share" class="bubble">
-		<div>
-			<g:plusone href="http://zombiewalrusdetective.com{{ comic.get_absolute_url }}" size="small"></g:plusone>
-			<script type="text/javascript">
-			(function() {
-				var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-				po.src = 'https://apis.google.com/js/plusone.js';
-				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-			})();
-			</script>
-		</div>
-		<div>
-			<a href="http://twitter.com/share" class="twitter-share-button" data-url="http://zombiewalrusdetective.com{{ comic.get_absolute_url }}" data-count="horizontal" data-via="zombie_walrus">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
-		</div>
-		<div>
-			<a href="http://www.tumblr.com/share/photo?source={{ comic.image.url|urlencode }}&caption=Zombie+Walrus+Detective+in+%22{{ comic.title|urlencode }}%22&clickthru={{ "http://zombiewalrusdetective"|urlencode }}{{ comic.get_absolute_url|urlencode }}" title="Share on Tumblr" style="display:inline-block; text-indent:-9999px; overflow:hidden; width:81px; height:20px; background:url('http://platform.tumblr.com/v1/share_1.png') top left no-repeat transparent;">Share on Tumblr</a>
-		</div>
-	</div>
-	<script type="text/javascript" src="{{ MEDIA_URL }}js/share.js"></script>
 </div>
 {% endblock %}
