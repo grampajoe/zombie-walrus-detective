@@ -1,4 +1,5 @@
 from django.conf.urls.defaults import patterns, include, url
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.generic import TemplateView
 from django.conf import settings
 from comics.views import ComicRSS, ComicAtom
@@ -14,7 +15,7 @@ urlpatterns = patterns('',
     url(r'^omgsickbro/', include(admin.site.urls)),
 )
 
-urlpatterns += patterns('zombiewalrus.comics.views',
+urlpatterns += patterns('comics.views',
     url(r'^$', 'comic', name='home'),
     url(r'^contact/$', 'contact', name='contact'),
     url(r'^contact/thanks/$',
@@ -35,3 +36,4 @@ if settings.DEBUG:
         url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
             {'document_root': settings.MEDIA_ROOT}),
     )
+    urlpatterns += staticfiles_urlpatterns()

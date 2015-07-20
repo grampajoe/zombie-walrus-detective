@@ -2,7 +2,7 @@
 {% block title %} in "{{ comic.title }}"{% endblock %}
 {% block content %}
 {% if comic.next %}<a href="{{ comic.next.get_absolute_url }}">{% endif %}
-	<img width="{{ comic.image.width }}" height="{{ comic.image.height }}" class="comic" src="{{ MEDIA_URL }}{{ comic.image }}" alt="Zombie Walrus Detective in &quot;{{ comic.title }}&quot;" title="Zombie Walrus Detective in &quot;{{ comic.title }}&quot;" />
+    <img width="{{ comic.image.width }}" height="{{ comic.image.height }}" class="comic" src="{{ comic.image.url }}" alt="Zombie Walrus Detective in &quot;{{ comic.title }}&quot;" title="Zombie Walrus Detective in &quot;{{ comic.title }}&quot;" />
 {% if comic.next %}</a>{% endif %}
 <ul id="nav">
 	<li class="first">{% if first_comic %}<a href="{{ first_comic.get_absolute_url }}">First</a>{% else %}First{% endif %}</li>

@@ -1,8 +1,11 @@
-from django.db import models
 import datetime
 import os
 import urllib
 import hashlib
+
+from django.core.files.base import ContentFile
+from django.db import models
+
 
 class Comic(models.Model):
     image = models.ImageField(upload_to='comics')
@@ -44,11 +47,19 @@ class Comic(models.Model):
 
     def save(self):
         super(Comic, self).save()
+
+        old_name = self.image.name
         base, ext = os.path.splitext(self.image.name)
-        os.rename(self.image.path, os.path.dirname(self.image.path) + '/' +
-                self.slug + ext)
-        self.image.name = os.path.dirname(self.image.name) + '/' + self.slug \
-                + ext
+        name_prefix = os.path.dirname(self.image.name)
+
+        new_name = os.path.join(name_prefix, self.slug + ext)
+
+        contents = self.image.read()
+
+        self.image.save(new_name, ContentFile(contents), save=False)
+        self.image.storage.delete(old_name)
+        self.image.name = new_name
+
         super(Comic, self).save()
 
     @models.permalink
