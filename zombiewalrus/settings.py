@@ -173,6 +173,5 @@ if os.environ.get('USE_S3_STORAGE', False):
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
     AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME', 'zombiewalrus')
     STATIC_URL = 'https://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
-    STATIC_ROOT = None
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
