@@ -47,8 +47,6 @@ LANGUAGE_CODE = 'en-us'
 
 SITE_ID = 1
 
-SECRET_KEY = os.environ.get('SECRET_KEY', 'please change this thank you')
-
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
 USE_I18N = True
@@ -98,7 +96,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'vc^lhhcsa6lcr2vd0=c--3vs)tn%l%^+vbese5(+ynair6p$=u'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'please change this thank you')
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
