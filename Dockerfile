@@ -11,7 +11,7 @@ WORKDIR /app
 
 ENV PORT=80
 ENV NEW_RELIC_APP_NAME="Zombie Walrus Detective"
-ENV NEW_RELIC_LICENCE_KEY="change-me-please"
+ENV NEW_RELIC_LICENSE_KEY="change-me-please"
 
 EXPOSE 80
 
