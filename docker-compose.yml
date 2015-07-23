@@ -6,6 +6,7 @@ app:
     - 'PORT=80'
     - 'DEBUG=True'
     - 'DATABASE_URI=mysql://zombiewalrus:detective@mysql/zombiewalrus'
+    - NEW_RELIC_LICENSE_KEY
   links:
     - 'mysql:mysql'
   volumes:

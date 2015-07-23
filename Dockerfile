@@ -10,7 +10,9 @@ COPY . /app
 WORKDIR /app
 
 ENV PORT=80
+ENV NEW_RELIC_APP_NAME="Zombie Walrus Detective"
+ENV NEW_RELIC_LICENCE_KEY="change-me-please"
 
 EXPOSE 80
 
-CMD gunicorn -b 0.0.0.0:$PORT --log-file=- --error-logfile=- --access-logfile=- -k eventlet -w 2 zombiewalrus.wsgi:application
+CMD newrelic-admin run-program gunicorn -b 0.0.0.0:$PORT --log-file=- --error-logfile=- --access-logfile=- -k eventlet -w 2 zombiewalrus.wsgi:application
