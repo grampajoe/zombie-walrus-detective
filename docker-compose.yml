@@ -6,9 +6,11 @@ app:
     - 'PORT=80'
     - 'DEBUG=True'
     - 'DATABASE_URI=mysql://zombiewalrus:detective@mysql/zombiewalrus'
+    - 'MEMCACHED_SERVERS=memcached:11211'
     - NEW_RELIC_LICENSE_KEY
   links:
     - 'mysql:mysql'
+    - 'memcached:memcached'
   volumes:
     - 'media:/app/media'
 
@@ -19,3 +21,6 @@ mysql:
     - 'MYSQL_USER=zombiewalrus'
     - 'MYSQL_PASSWORD=detective'
     - 'MYSQL_DATABASE=zombiewalrus'
+
+memcached:
+  image: 'memcached:latest'
