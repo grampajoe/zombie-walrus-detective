@@ -5,7 +5,7 @@ boto==2.38.0
 dj-database-url==0.3.0
 django-nose==1.2
 django-storages==1.1.8
-eventlet==0.17.4
+eventlet==0.31.0
 greenlet==0.4.7
 gunicorn==19.3.0
 newrelic==2.52.0.40
